@@ -1,27 +1,52 @@
-Recover Private Keys From Deleted Wallet Files
-====================
+# Search bitcoins using Hexadecimal
 
-In this guide we will use scalpel and a custom ruby script and gem to recover lost private keys from deleted wallet files. The first step when deciding to attempt to recover private keys from a lost wallet file is to determine which public addresses holds the coins you are interested in recovering. Once you determine this you can then attempt to extract all the private keys on a drive iterate through each private key, compute the public key and determine it if is the key you are looking for.
+It has three capabilities for searching.
+-Search for bytes using hexidecimal
+-Search for a plain text string
+-Search for a smaller binary file
 
-Windows Usage
----------------------
+Syntax:
+  search-cli -p A081853081820201P
 
- 
-Linux Usage
----------------------
+EXAMPLES
+  Search for the hex bytes "FF14DE" in the file gamefile.db:
+  $ ./search-cli -p "FF14DE" gamefile.db
+  Match at offset:            907          38B in  gamefile.db
+  Match at offset:           1881          759 in  gamefile.db
+  Match at offset:           7284         1C74 in  gamefile.db
+  Match at offset:           7420         1CFC in  gamefile.db
+  Match at offset:           8096         1FA0 in  gamefile.db
 
- 
+
+The printed offsets are listed in decimal and hexidecimal formats.
+You can also search for unknown patterns with "??". Just insert them where ever you have an unknown byte:
+  $ ./search-cli -p "A081853081820201P" wallet.dat
 
 
+# Options of SearchBin:
 
-Donations
----------------------
+  $ ./search-cli --help
 
-I created this to help others and I believe in free open source code so I don't expect to be paid, but if you are able to recover funds and are feeling generous, I accept donations. 
+  Optional Arguments:
+    -h, --help            show help message and exit
+    -f FILE, --file FILE  file to read search pattern from
+    -t PATTERN, --text PATTERN
+                          a (non-unicode case-sensitive) text string to search
+                          for
+    -p PATTERN, --pattern PATTERN
+                          a hexidecimal pattern to search for
+    -b NUM, --buffer-size NUM
+                          read buffer size (in bytes). default is 8388608 (8MB)
+    -s NUM, --start NUM   starting position in file to begin searching
+    -e NUM, --end NUM     end search at this position, measuring from beginning
+                          of file
+    -m NUM, --max-count NUM
+                          maximum number of matches to find
+    -l FILE, --log FILE   write matched offsets to FILE, instead of standard
+                          output
+    -v, --verbose         verbose, output the number of bytes searched after
+                          each buffer read
+    -V, --version         print version information
 
-I lost 0.24 bitcoins and unfortunately was not able to recover them, and my significant other 20 lost I gifted to them in aencrypted wallet. 
 
-I was able to recover 10,000 lost Darkcoins using this method though and was grateful it worked and wanted to share my methods with others. 
-
-1NFk9ukkUw6w5oQ7JtaPPr2MpyQ7RkiQXC
 
