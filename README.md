@@ -5,4 +5,5 @@ Bitcoin-Search-Wallet is a fast commandline program for searching within binary 
 # Linux Usage:
         search-cli -p A081853081820201P
 
-
+# Windows Usage:
+        search.exe -p A081853081820201P
